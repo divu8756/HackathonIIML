@@ -3,824 +3,789 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="CodeStorm '26 hackathon hub for IIM Lucknow — live countdown, in-browser Coding Arena, project submission, team dashboard and analytics. Prize pool Rs 10,00,000. Teams of three.">
+<title>CodeStorm '26 — IIM Lucknow Hackathon</title>
+<meta name="description" content="CodeStorm '26, the flagship hackathon at IIM Lucknow. 14–15 November 2026, teams of three, a prize pool of Rs 10,00,000. Register, build in the Coding Arena, and submit your project.">
 <meta name="theme-color" content="#12101c">
-<meta property="og:title" content="CodeStorm '26 Hub — IIM Lucknow Hackathon">
-<meta property="og:description" content="Live countdown, Coding Arena, project submission, team dashboard and analytics. Rs 10,00,000 prize pool. Teams of three.">
+<meta property="og:title" content="CodeStorm '26 — IIM Lucknow Hackathon">
+<meta property="og:description" content="36 hours. Teams of three. Rs 10,00,000 in prizes. 14–15 November 2026 at IIM Lucknow, Noida Campus.">
 <meta property="og:type" content="website">
-<style>
-  html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; }
-  img { max-width: 100%; }
-  [hidden] { display: none !important; }
-</style>
-<title>CodeStorm '26 Hub</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<style>
-  :root {
-    --ink: #12101c; --surface: #1b1730; --surface-2: #241d3f; --line: #352c56;
-    --text: #ece9f6; --muted: #a89fc7;
-    --violet: #8b6cff; --violet-soft: #b3a0ff; --gold: #f3b64a; --mint: #46e0ac; --danger: #ff6b8a; --cyan: #55c8ff;
-    --shadow: 0 18px 40px -20px rgba(0,0,0,.75);
-    --font-display: 'Sora', system-ui, sans-serif;
-    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-    color-scheme: dark;
-  }
-  :root[data-theme="light"] {
-    --ink: #f6f3fb; --surface: #ffffff; --surface-2: #f2edfa; --line: #e2d9f2;
-    --text: #1e1830; --muted: #6a6088;
-    --violet: #6c47ff; --violet-soft: #7a5cff; --gold: #b9770c; --mint: #12a97a; --danger: #d43b5f; --cyan: #1f80c2;
-    --shadow: 0 18px 40px -24px rgba(60,40,120,.35);
-    color-scheme: light;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--ink); color: var(--text); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.12; text-wrap: balance; margin: 0; }
-  a { color: inherit; }
-  .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
-  .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  .eyebrow { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--violet-soft); }
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238b6cff'/><text y='70' x='50' text-anchor='middle' font-size='56' font-family='sans-serif' font-weight='bold' fill='%2312101c'>C</text></svg>">
 
-  /* NAV */
-  nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; backdrop-filter: blur(14px);
-    background: color-mix(in srgb, var(--ink) 80%, transparent); border-bottom: 1px solid var(--line); }
-  .nav-inner { display: flex; align-items: center; gap: 8px; padding-block: 10px; flex-wrap: wrap; }
-  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; margin-right: auto; }
-  .brand .spark { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: linear-gradient(135deg, var(--violet), var(--gold)); color: #12101c; font-weight: 800; }
-  .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
-  .tab { font-family: var(--font-display); font-weight: 500; font-size: .86rem; color: var(--muted); background: transparent;
-    border: 1px solid transparent; border-radius: 9px; padding: 8px 12px; cursor: pointer; white-space: nowrap; }
-  .tab:hover { color: var(--text); background: var(--surface); }
-  .tab[aria-selected="true"] { color: var(--text); background: var(--surface); border-color: var(--line); }
-  .theme-toggle { background: transparent; border: 1px solid var(--line); color: var(--muted); width: 38px; height: 38px; border-radius: 10px; cursor: pointer; }
-
-  .btn { font-family: var(--font-display); font-weight: 600; font-size: .9rem; border: none; border-radius: 10px; padding: 11px 18px;
-    cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: transform .12s ease, filter .12s ease; }
-  .btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
-  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-  .btn-primary { background: linear-gradient(135deg, var(--violet), var(--violet-soft)); color: #fff; box-shadow: var(--shadow); }
-  .btn-mint { background: var(--mint); color: #06231a; }
-  .btn-gold { background: var(--gold); color: #2b1c02; }
-  .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
-  .btn-sm { padding: 8px 12px; font-size: .82rem; border-radius: 8px; }
-
-  .view { display: none; }
-  .view.active { display: block; animation: fade .25s ease; }
-  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  @media (prefers-reduced-motion: reduce) { .view.active { animation: none; } }
-
-  section { padding-block: 40px; }
-  .sec-head { max-width: 62ch; margin-bottom: 26px; }
-  .sec-head h2 { font-size: clamp(1.7rem, 4.4vw, 2.5rem); font-weight: 700; letter-spacing: -.02em; margin-top: 8px; }
-  .sec-head p { color: var(--muted); margin-top: 8px; }
-
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
-  .grid { display: grid; gap: 16px; }
-
-  /* HERO */
-  header.hero { position: relative; overflow: hidden; }
-  header.hero::before { content:""; position:absolute; inset:0; pointer-events:none;
-    background: radial-gradient(55% 70% at 15% 0%, rgba(139,108,255,.32), transparent 60%), radial-gradient(45% 55% at 92% 5%, rgba(243,182,74,.16), transparent 55%); }
-  .hero-inner { position: relative; padding-block: 52px 34px; }
-  .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-  .pill { font-family: var(--font-mono); font-size: .74rem; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line);
-    background: var(--surface); color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
-  .pill b { color: var(--text); font-weight: 600; }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 3px color-mix(in srgb, var(--mint) 25%, transparent); }
-  h1.title { font-size: clamp(2.3rem, 7vw, 4.4rem); font-weight: 800; letter-spacing: -.03em; }
-  h1.title .grad { background: linear-gradient(120deg, var(--violet-soft), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .lede { max-width: 46ch; color: var(--muted); font-size: 1.08rem; margin-top: 16px; }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-
-  /* COUNTDOWN */
-  .cd-wrap { margin-top: 34px; background: linear-gradient(180deg, var(--surface), var(--surface-2)); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: var(--shadow); }
-  .cd-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-  .cd-phase { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
-  .cd-phase .live { display:inline-flex; align-items:center; gap:6px; color: var(--mint); font-size:.8rem; font-family: var(--font-mono); }
-  .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  .cd-cell { text-align: center; background: var(--ink); border: 1px solid var(--line); border-radius: 12px; padding: 14px 8px; }
-  .cd-cell .num { font-family: var(--font-mono); font-size: clamp(1.4rem, 5vw, 2rem); font-weight: 600; }
-  .cd-cell .lbl { font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  .cd-track { margin-top: 16px; }
-  .cd-bar { height: 8px; border-radius: 999px; background: var(--ink); border: 1px solid var(--line); overflow: hidden; }
-  .cd-bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--violet), var(--gold)); border-radius: 999px; }
-  .cd-milestones { display: flex; justify-content: space-between; margin-top: 8px; gap: 6px; flex-wrap: wrap; }
-  .cd-ms { font-size: .72rem; color: var(--muted); font-family: var(--font-mono); }
-  .cd-ms.done { color: var(--mint); }
-  .cd-ms.cur { color: var(--gold); }
-
-  /* KPI ROW */
-  .kpis { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 30px; }
-  @media (min-width: 720px) { .kpis { grid-template-columns: repeat(4,1fr); } }
-  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
-  .kpi .v { font-family: var(--font-mono); font-size: 1.7rem; font-weight: 600; letter-spacing: -.02em; }
-  .kpi .l { color: var(--muted); font-size: .82rem; }
-  .kpi.v-gold .v { color: var(--gold); } .kpi.v-mint .v { color: var(--mint); } .kpi.v-violet .v { color: var(--violet-soft); } .kpi.v-cyan .v { color: var(--cyan); }
-
-  /* prizes mini */
-  .prizes { display: grid; gap: 12px; grid-template-columns: repeat(2,1fr); }
-  @media (min-width: 900px) { .prizes { grid-template-columns: repeat(4,1fr); } }
-  .prize-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
-  .prize-card .rank { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .prize-card .val { font-family: var(--font-mono); font-size: 1.55rem; font-weight: 600; margin-top: 4px; }
-  .prize-card.first { border-color: color-mix(in srgb, var(--gold) 50%, var(--line)); } .prize-card.first .val { color: var(--gold); }
-
-  /* FORMS */
-  .field { margin-bottom: 15px; }
-  .field label { display: block; font-size: .82rem; font-weight: 600; margin-bottom: 6px; }
-  .field label .req { color: var(--danger); }
-  .field input, .field select, .field textarea { width: 100%; padding: 11px 13px; border-radius: 10px; border: 1px solid var(--line);
-    background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: .95rem; }
-  .field textarea { min-height: 90px; resize: vertical; }
-  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--violet); outline-offset: 1px; border-color: var(--violet); }
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 520px) { .two { grid-template-columns: 1fr; } }
-  .form-msg { font-size: .85rem; font-weight: 500; margin-left: 4px; }
-  .form-msg.err { color: var(--danger); } .form-msg.ok { color: var(--mint); }
-
-  /* two-col layouts */
-  .split { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  @media (min-width: 880px) { .split.wide-left { grid-template-columns: 1.4fr .8fr; align-items: start; } }
-  @media (min-width: 880px) { .split.even { grid-template-columns: 1fr 1fr; align-items: start; } }
-
-  /* ARENA */
-  .arena-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  @media (min-width: 940px) { .arena-grid { grid-template-columns: 1.5fr 1fr; align-items: start; } }
-  .chal-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
-  .chal-pick { font-family: var(--font-mono); font-size: .78rem; border: 1px solid var(--line); background: var(--surface-2); color: var(--muted);
-    border-radius: 8px; padding: 7px 11px; cursor: pointer; }
-  .chal-pick[aria-selected="true"] { color: var(--text); border-color: var(--violet); background: color-mix(in srgb, var(--violet) 16%, var(--surface)); }
-  .chal-pick.solved::after { content:" ✓"; color: var(--mint); }
-  .chal-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 6px; }
-  .tagchip { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); }
-  .tagchip.easy { color: var(--mint); border-color: color-mix(in srgb, var(--mint) 45%, var(--line)); }
-  .tagchip.medium { color: var(--gold); border-color: color-mix(in srgb, var(--gold) 45%, var(--line)); }
-  .tagchip.hard { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 45%, var(--line)); }
-  .code-editor { width: 100%; min-height: 200px; font-family: var(--font-mono); font-size: .88rem; line-height: 1.55; tab-size: 2;
-    background: #0d0b16; color: #e7e2f7; border: 1px solid var(--line); border-radius: 12px; padding: 14px; resize: vertical; }
-  :root[data-theme="light"] .code-editor { background: #1a1530; color: #e7e2f7; }
-  .console { font-family: var(--font-mono); font-size: .82rem; background: var(--ink); border: 1px solid var(--line); border-radius: 10px;
-    padding: 12px 14px; margin-top: 12px; min-height: 46px; white-space: pre-wrap; }
-  .console .pass { color: var(--mint); } .console .fail { color: var(--danger); } .console .dim { color: var(--muted); }
-  .arena-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
-
-  /* LEADERBOARD / TABLES */
-  table.lb { width: 100%; border-collapse: collapse; font-size: .9rem; }
-  table.lb th, table.lb td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
-  table.lb th { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-  table.lb td.pts, table.lb th.pts { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  table.lb tr.you td { background: color-mix(in srgb, var(--violet) 14%, transparent); }
-  .rankbadge { font-family: var(--font-mono); font-weight: 600; }
-  .rankbadge.g { color: var(--gold); } .rankbadge.s { color: var(--violet-soft); } .rankbadge.b { color: var(--mint); }
-
-  /* DASHBOARD */
-  .status-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 16px; }
-  .status { font-family: var(--font-mono); font-size: .74rem; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
-  .status.on { color: var(--mint); border-color: color-mix(in srgb, var(--mint) 45%, var(--line)); background: color-mix(in srgb, var(--mint) 12%, transparent); }
-  .status.warn { color: var(--gold); border-color: color-mix(in srgb, var(--gold) 45%, var(--line)); }
-  .progress { height: 10px; border-radius: 999px; background: var(--ink); border: 1px solid var(--line); overflow: hidden; margin: 6px 0; }
-  .progress > i { display: block; height: 100%; background: linear-gradient(90deg, var(--mint), var(--cyan)); }
-  .checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
-  .checklist li { display: flex; gap: 10px; font-size: .9rem; align-items: flex-start; color: var(--muted); }
-  .checklist li.done { color: var(--text); } .checklist .bx { color: var(--muted); } .checklist li.done .bx { color: var(--mint); }
-  .member-list { display: grid; gap: 8px; }
-  .member-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); }
-  .avatar { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; font-weight: 700; font-family: var(--font-display); color: #12101c; }
-  .empty { text-align: center; color: var(--muted); padding: 26px; border: 1px dashed var(--line); border-radius: 12px; }
-
-  /* SUBMISSIONS list */
-  .sub-item { border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--surface-2); }
-  .sub-item h4 { font-size: 1.05rem; }
-  .sub-item .track-tag { font-family: var(--font-mono); font-size: .72rem; color: var(--violet-soft); }
-  .sub-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; font-size: .84rem; }
-  .sub-links a { color: var(--cyan); text-decoration: none; }
-  .sub-links a:hover { text-decoration: underline; }
-
-  /* ANALYTICS */
-  .charts { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  @media (min-width: 820px) { .charts { grid-template-columns: 1fr 1fr; } }
-  .chart-box { position: relative; height: 280px; }
-  .chart-card h4 { font-size: 1rem; margin-bottom: 4px; }
-  .chart-card .sub { color: var(--muted); font-size: .82rem; margin-bottom: 12px; }
-
-  footer { border-top: 1px solid var(--line); padding-block: 30px; color: var(--muted); margin-top: 20px; }
-  .foot-inner { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; font-size: .84rem; }
-  .divider { border: none; border-top: 1px solid var(--line); margin: 34px 0; }
-  .note { font-size: .82rem; color: var(--muted); }
-</style>
-
+<!-- theme is applied before first paint so the page never flashes the wrong one -->
+<script>
+  try {
+    var t = localStorage.getItem('codestorm26-theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
 </head>
 <body>
-<nav>
-  <div class="wrap nav-inner">
-    <div class="brand"><span class="spark">CS</span> CodeStorm<span style="color:var(--violet-soft)">'26</span></div>
-    <div class="tabs" role="tablist" id="tabs">
-      <button class="tab" role="tab" data-view="overview" aria-selected="true">Overview</button>
-      <button class="tab" role="tab" data-view="arena" aria-selected="false">Coding Arena</button>
-      <button class="tab" role="tab" data-view="submit" aria-selected="false">Submit Project</button>
-      <button class="tab" role="tab" data-view="dashboard" aria-selected="false">Team Dashboard</button>
-      <button class="tab" role="tab" data-view="analytics" aria-selected="false">Analytics</button>
-    </div>
-    <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">◑</button>
-  </div>
-</nav>
 
-<!-- ================= OVERVIEW ================= -->
-<div class="view active" id="view-overview">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrap nav-inner">
+    <button class="brand" data-goto="home" aria-label="CodeStorm '26 — go to home">
+      <span class="spark" aria-hidden="true">CS</span>
+      <span class="brand-text">CodeStorm '26<small>IIM Lucknow</small></span>
+    </button>
+
+    <nav id="tabs" class="tabs" data-open="false" aria-label="Primary">
+      <button class="tab" data-view="home"      role="tab" aria-selected="true">Home</button>
+      <button class="tab" data-view="rules"     role="tab" aria-selected="false">Rules</button>
+      <button class="tab" data-view="register"  role="tab" aria-selected="false">Register</button>
+      <button class="tab" data-view="arena"     role="tab" aria-selected="false">Coding Arena</button>
+      <button class="tab" data-view="submit"    role="tab" aria-selected="false">Submit</button>
+      <button class="tab" data-view="dashboard" role="tab" aria-selected="false">My Team</button>
+      <button class="tab" data-view="analytics" role="tab" aria-selected="false">Analytics</button>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Switch to light theme" title="Switch theme">◑</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="tabs">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- Countdown ribbon: the live timer that follows you across every view -->
+<div class="cd-ribbon">
+  <div class="wrap cd-ribbon-inner">
+    <span class="live-dot" aria-hidden="true"></span>
+    <span class="phase" id="ribbon-phase">Loading…</span>
+    <span class="clock mono" id="ribbon-clock" role="timer" aria-live="off">--d --:--:--</span>
+    <button class="btn btn-primary btn-sm cta" data-goto="register">Register your team</button>
+  </div>
+</div>
+
+<noscript>
+  <div class="wrap" style="padding-block:24px">
+    <div class="alert warn"><span class="ico">⚠</span>
+      <p>This portal needs JavaScript for registration, submissions and the live timer.
+      Please enable it, or email <a href="mailto:codestorm@iiml.example">codestorm@iiml.example</a> and we will register your team manually.</p>
+    </div>
+  </div>
+</noscript>
+
+<main id="main">
+
+<!-- ====================== HOME ====================== -->
+<div class="view active" id="view-home" role="tabpanel" aria-label="Home">
+
   <header class="hero">
-    <div class="wrap hero-inner">
+    <div class="wrap">
       <div class="badges">
-        <span class="pill"><span class="dot"></span> <b id="ov-status">Registrations open</b></span>
+        <span class="pill"><span class="live-dot" aria-hidden="true"></span> <b id="hero-status">Registrations open</b></span>
         <span class="pill">Hosted by <b>IIM Lucknow</b></span>
-        <span class="pill">Teams of <b>3</b></span>
-        <span class="pill">Prize pool <b>₹10,00,000</b></span>
+        <span class="pill">Teams of exactly <b>3</b></span>
+        <span class="pill">Entry <b>free</b></span>
       </div>
-      <h1 class="title">The <span class="grad">CodeStorm '26</span> hackathon hub</h1>
-      <p class="lede">Everything for the 36-hour build in one place — practise in the Coding Arena, submit your project, track your team, and watch the numbers move on the live analytics board.</p>
+
+      <h1 class="title">Build something that <span class="grad">outlasts the weekend</span></h1>
+      <p class="lede" id="hero-tagline"></p>
+
       <div class="hero-actions">
-        <button class="btn btn-mint" data-goto="arena">Enter the Coding Arena →</button>
-        <button class="btn btn-ghost" data-goto="dashboard">Set up your team</button>
+        <a class="btn btn-primary btn-lg" href="#/register" data-goto="register">Register your team →</a>
+        <a class="btn btn-ghost btn-lg" href="#/rules" data-goto="rules">Read the rules</a>
+      </div>
+
+      <div class="hero-meta">
+        <div><div class="k">Dates</div><div class="v" id="hero-dates"></div></div>
+        <div><div class="k">Venue</div><div class="v" id="hero-venue"></div></div>
+        <div><div class="k">Prize pool</div><div class="v" id="hero-prize"></div></div>
+        <div><div class="k">Format</div><div class="v">36 hours, in person</div></div>
       </div>
 
       <!-- LIVE COUNTDOWN -->
-      <div class="cd-wrap" id="countdown">
+      <section class="cd-wrap" aria-labelledby="cd-heading">
+        <h2 id="cd-heading" class="sr-only">Countdown to the next milestone</h2>
         <div class="cd-top">
-          <div class="cd-phase" id="cd-phase-label"><span class="live"><span class="dot"></span>LIVE</span> &nbsp;Loading…</div>
-          <div class="note mono" id="cd-target-date"></div>
+          <div class="cd-phase" id="cd-phase"><span class="live"><span class="live-dot"></span>LIVE</span> Loading…</div>
+          <div class="note mono" id="cd-target"></div>
         </div>
-        <div class="countdown">
-          <div class="cd-cell"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
-          <div class="cd-cell"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
-          <div class="cd-cell"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
-          <div class="cd-cell"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+        <div class="countdown" role="timer" aria-live="off">
+          <div class="cd-cell"><div class="num mono" id="cd-d">--</div><div class="lbl">Days</div></div>
+          <div class="cd-cell"><div class="num mono" id="cd-h">--</div><div class="lbl">Hours</div></div>
+          <div class="cd-cell"><div class="num mono" id="cd-m">--</div><div class="lbl">Minutes</div></div>
+          <div class="cd-cell"><div class="num mono" id="cd-s">--</div><div class="lbl">Seconds</div></div>
         </div>
+        <p class="sr-only" id="cd-sr" aria-live="polite"></p>
         <div class="cd-track">
           <div class="cd-bar"><i id="cd-progress" style="width:0%"></i></div>
           <div class="cd-milestones" id="cd-milestones"></div>
         </div>
-      </div>
+      </section>
 
-      <div class="kpis" id="ov-kpis"></div>
+      <div class="kpis" id="home-kpis"></div>
     </div>
   </header>
 
-  <section>
+  <!-- PRIZES -->
+  <section id="prizes" aria-labelledby="prizes-h">
     <div class="wrap">
-      <div class="sec-head"><div class="eyebrow">Prize pool · ₹10,00,000</div><h2>What you're playing for</h2></div>
-      <div class="prizes">
-        <div class="prize-card first"><div class="rank">🏆 Winner</div><div class="val">₹5,00,000</div></div>
-        <div class="prize-card"><div class="rank">🥈 Runner-up</div><div class="val">₹3,00,000</div></div>
-        <div class="prize-card"><div class="rank">🥉 2nd runner-up</div><div class="val">₹1,50,000</div></div>
-        <div class="prize-card"><div class="rank">✦ Best track</div><div class="val">₹50,000</div></div>
+      <div class="sec-head">
+        <p class="eyebrow">Prize pool · ₹10,00,000</p>
+        <h2 id="prizes-h">What you're playing for</h2>
+        <p>Cash, not vouchers. Paid by bank transfer within 30 working days of the closing ceremony, split equally across the three members unless you tell us otherwise.</p>
       </div>
-      <p class="note" style="margin-top:14px">₹5,00,000 + ₹3,00,000 + ₹1,50,000 + ₹50,000 = <b style="color:var(--text)">₹10,00,000</b> · Teams of three · Registration free · 14–15 November 2026, IIM Lucknow (Noida Campus).</p>
+      <div class="podium" id="podium"></div>
+      <h3 style="font-size:1rem;margin-top:32px">Special prizes</h3>
+      <div class="special-grid" id="special-prizes"></div>
+      <p class="prize-total" id="prize-total"></p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="sec-alt" aria-labelledby="about-h">
+    <div class="wrap split even">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-h" style="font-size:clamp(1.7rem,4.4vw,2.5rem);margin-top:8px">A hackathon run like a product team, not a party</h2>
+        <p style="color:var(--muted);margin-top:16px">CodeStorm is the flagship build weekend of IIM Lucknow's Noida campus, now in its fourth edition. Three hundred–odd teams apply, we take the strongest, and for 36 hours the campus turns into one very caffeinated engineering floor.</p>
+        <p style="color:var(--muted)">What makes it different is the brief. Every problem statement comes from an operating company with a real constraint attached — a reconciliation backlog, a thin-file borrower, four hundred suppliers with no emissions data. You are not building a demo for a slide. You are building the first version of something a team could actually run on Monday.</p>
+        <p style="color:var(--muted)">The jury is faculty, engineering leaders and investors, and the rubric is published before the event rather than after it. Teams of exactly three, because that is the smallest group that still has to communicate.</p>
+      </div>
+      <div class="grid" style="gap:16px">
+        <div class="card"><h3>🎓 Open to every campus</h3><p class="note" style="margin:8px 0 0">Students from any recognised Indian institution, plus 2025–26 graduates. Last edition brought teams from 64 colleges.</p></div>
+        <div class="card"><h3>🧑‍🏫 Forty mentors on the floor</h3><p class="note" style="margin:8px 0 0">Two structured mentoring rounds with practitioners from the sponsor engineering teams, in 15-minute blocks you book yourself.</p></div>
+        <div class="card"><h3>🚀 A path after the weekend</h3><p class="note" style="margin:8px 0 0">Finalists get office hours at the IIML Enterprise Incubation Centre, and the title sponsor fast-tracks winners through its interview loop.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACKS -->
+  <section id="tracks" aria-labelledby="tracks-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Themes &amp; tracks</p>
+        <h2 id="tracks-h">Pick your battlefield</h2>
+        <p>You choose a track at registration and can switch it once, any time before submissions close. Each track carries its own ₹50,000 prize on top of the main podium.</p>
+      </div>
+      <div class="grid grid-3" id="track-grid"></div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule" class="sec-alt" aria-labelledby="schedule-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Schedule</p>
+        <h2 id="schedule-h">Two days, minute by minute</h2>
+        <p>All times IST. The only two that really matter are 11:00 on Saturday and 12:00 on Sunday.</p>
+      </div>
+      <div class="day-tabs" id="day-tabs" role="tablist" aria-label="Schedule days"></div>
+      <ol class="timeline" id="timeline"></ol>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section id="sponsors" aria-labelledby="sponsors-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Sponsors</p>
+        <h2 id="sponsors-h">Backed by teams who ship</h2>
+        <p>Our partners write the problem statements, send the mentors, and fund the prize pool.</p>
+      </div>
+      <div id="sponsor-tiers"></div>
+      <div class="card" style="margin-top:8px">
+        <h3>Want your logo here?</h3>
+        <p class="note" style="margin:8px 0 16px">Sponsorship decks for the 2026 edition are available now — tiers from ₹1,00,000, including problem-statement authorship and on-floor recruiting.</p>
+        <a class="btn btn-ghost btn-sm" id="sponsor-mail" href="#">Request the sponsorship deck</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="sec-alt" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-h">Questions we actually get asked</h2>
+      </div>
+      <div class="faq" id="faq-list"></div>
+      <p class="note" style="margin-top:24px">Still stuck? Write to <a id="faq-mail" href="#">codestorm@iiml.example</a> and a human replies within a working day.</p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section aria-labelledby="cta-h">
+    <div class="wrap">
+      <div class="card" style="text-align:center;padding:48px 24px">
+        <p class="eyebrow">Registrations close 1 November 2026</p>
+        <h2 id="cta-h" style="font-size:clamp(1.6rem,4.4vw,2.3rem);margin:8px 0 12px">Get your three together</h2>
+        <p class="note" style="max-width:52ch;margin:0 auto 24px">Registration takes about four minutes and needs the name, email, college and role of all three members.</p>
+        <a class="btn btn-primary btn-lg" href="#/register" data-goto="register">Register your team →</a>
+      </div>
     </div>
   </section>
 </div>
 
-<!-- ================= CODING ARENA ================= -->
-<div class="view" id="view-arena">
-  <section><div class="wrap">
-    <div class="sec-head"><div class="eyebrow">Coding Arena</div><h2>Warm up before the storm</h2>
-      <p>Solve practice challenges in JavaScript right in your browser. Passing all test cases banks points for your team and pushes you up the live leaderboard.</p></div>
-    <div class="arena-grid">
-      <div class="card">
-        <div class="chal-tabs" id="chalTabs"></div>
-        <div class="chal-meta">
-          <span class="tagchip" id="chalDiff">—</span>
-          <span class="tagchip" id="chalPts">—</span>
-          <span class="note" id="chalSolvedNote"></span>
-        </div>
-        <h3 id="chalTitle" style="font-size:1.2rem">—</h3>
-        <p class="note" id="chalDesc" style="margin:8px 0 14px"></p>
-        <label class="note" for="codeArea" style="display:block;margin-bottom:6px;font-weight:600">Your solution</label>
-        <textarea class="code-editor" id="codeArea" spellcheck="false" aria-label="Code editor"></textarea>
-        <div class="arena-actions">
-          <button class="btn btn-mint btn-sm" id="runBtn">▶ Run tests</button>
-          <button class="btn btn-ghost btn-sm" id="resetBtn">Reset code</button>
-          <span class="note" id="arenaPointsNote" style="margin-left:auto"></span>
-        </div>
-        <div class="console" id="console"><span class="dim">Test results will appear here.</span></div>
+<!-- ====================== RULES ====================== -->
+<div class="view" id="view-rules" role="tabpanel" aria-label="Rules and instructions">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Rules &amp; instructions</p>
+        <h2>Everything binding, on one page</h2>
+        <p>Read this before you register. By submitting a project you accept all of it. Last updated 18 September 2026.</p>
       </div>
 
-      <div class="card">
-        <h3 style="font-size:1.1rem;margin-bottom:4px">Live leaderboard</h3>
-        <p class="note" style="margin-bottom:14px">Practice points across all teams. Yours updates the moment you clear a challenge.</p>
-        <table class="lb" id="leaderboard"><thead><tr><th style="width:34px">#</th><th>Team</th><th class="pts">Points</th></tr></thead><tbody></tbody></table>
+      <div class="rules-layout">
+        <nav class="rules-nav" aria-label="Rules sections">
+          <ul>
+            <li><a href="#r-eligibility">Eligibility</a></li>
+            <li><a href="#r-teams">Team composition</a></li>
+            <li><a href="#r-conduct">Code of conduct</a></li>
+            <li><a href="#r-format">Submission format</a></li>
+            <li><a href="#r-judging">Judging criteria</a></li>
+            <li><a href="#r-timeline">Timelines</a></li>
+            <li><a href="#r-legal">IP &amp; prizes</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <div class="rule-block" id="r-eligibility">
+            <h3>① Eligibility</h3>
+            <ul class="rule-list">
+              <li><span class="mk">✓</span><span>Enrolled in a recognised Indian undergraduate, postgraduate or diploma programme at the time of the event, <b>or</b> graduated on or after 1 June 2025.</span></li>
+              <li><span class="mk">✓</span><span>Aged 18 or over on 14 November 2026. Photo ID and a college ID are checked at the gate.</span></li>
+              <li><span class="mk">✓</span><span>Open to every campus in India. You do not need any affiliation with IIM Lucknow.</span></li>
+              <li><span class="mk">✓</span><span>One team per person. Registering on two teams voids both.</span></li>
+            </ul>
+            <ul class="rule-list no" style="margin-top:12px">
+              <li><span class="mk">✗</span><span>Full-time employees of the organising committee, the jury, or any sponsor's hackathon team cannot compete.</span></li>
+              <li><span class="mk">✗</span><span>Teams that have already won a cash prize with the same project at another hackathon in 2026.</span></li>
+            </ul>
+          </div>
+
+          <div class="rule-block" id="r-teams">
+            <h3>② Team composition</h3>
+            <div class="alert warn" style="margin-bottom:16px">
+              <span class="ico" aria-hidden="true">⚠</span>
+              <p><b>Exactly three members. No exceptions.</b> Not two, not four. The registration form will not issue a team ID until all three are filled in, and a team that arrives with two members cannot check in.</p>
+            </div>
+            <ul class="rule-list">
+              <li><span class="mk">✓</span><span>Members may come from different colleges, different years and different disciplines. Mixed teams tend to score better on Design and Pitch.</span></li>
+              <li><span class="mk">✓</span><span>One member is designated Team Lead at registration. All official email goes to them and they speak for the team in disputes.</span></li>
+              <li><span class="mk">✓</span><span>Substitutions are allowed up to 7 November by writing to the organisers. After that the roster is frozen.</span></li>
+              <li><span class="mk">✓</span><span>No member may be replaced mid-event, and a team that drops to two members may keep building but forfeits the podium prizes.</span></li>
+            </ul>
+          </div>
+
+          <div class="rule-block" id="r-conduct">
+            <h3>③ Code of conduct</h3>
+            <p class="note" style="margin-bottom:16px">CodeStorm follows a simple standard: everyone leaves the weekend wanting to come back. The organising committee may remove any participant, without refund or appeal, for a breach of the following.</p>
+            <ul class="rule-list">
+              <li><span class="mk">✓</span><span><b>Respect.</b> No harassment, discrimination or intimidation on any basis — including but not limited to gender, caste, religion, disability, orientation or institution.</span></li>
+              <li><span class="mk">✓</span><span><b>Honesty.</b> Your submission must be your team's own work, built in the window. Declare every AI assistant, library and template you used.</span></li>
+              <li><span class="mk">✓</span><span><b>Safety.</b> No attacking the event infrastructure, other teams' machines, or sponsor systems beyond the sandboxes you are given.</span></li>
+              <li><span class="mk">✓</span><span><b>Care.</b> Sleep, eat, and look after the people next to you. The quiet room is open all night and mentors are not a scoring mechanism.</span></li>
+            </ul>
+            <p class="note" style="margin-top:16px">Report a problem to any organiser in a purple lanyard, or confidentially to <a id="conduct-mail" href="#">codestorm@iiml.example</a>. Reports are handled by two committee members and never by the person reported.</p>
+          </div>
+
+          <div class="rule-block" id="r-format">
+            <h3>④ Submission format</h3>
+            <p class="note" style="margin-bottom:16px">Submit through the <a href="#/submit" data-goto="submit">Submit</a> tab. You may edit as often as you like until the deadline; the last saved version is the one judged.</p>
+            <div class="table-scroll">
+              <table class="data">
+                <caption>Required and optional components</caption>
+                <thead><tr><th>Component</th><th>Requirement</th><th>Limit</th></tr></thead>
+                <tbody>
+                  <tr><td><b>Public repository</b></td><td>Required — GitHub, GitLab or Bitbucket, with a README that explains how to run it</td><td>Any size</td></tr>
+                  <tr><td><b>Demo video</b></td><td>Required — unlisted YouTube, Loom or Drive link showing the working product</td><td>3 minutes</td></tr>
+                  <tr><td><b>Slide deck</b></td><td>Required — PDF covering problem, solution, architecture and what is next</td><td>10 slides / 20 MB</td></tr>
+                  <tr><td><b>Project summary</b></td><td>Required — plain text in the form, read first by every judge</td><td>150 words</td></tr>
+                  <tr><td><b>Tools declaration</b></td><td>Required — AI assistants, APIs and starter templates you used</td><td>—</td></tr>
+                  <tr><td><b>Live deployment</b></td><td>Optional, but a working URL reliably lifts the Execution score</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <ul class="rule-list" style="margin-top:20px">
+              <li><span class="mk">✓</span><span>Pre-existing code is allowed if it was public before 14 November. The substantive work must be committed during the window, and judges read commit history.</span></li>
+              <li><span class="mk">✓</span><span>Keep the repository public until results are announced. A private repo at judging time scores zero on Technical Execution.</span></li>
+              <li><span class="mk">✓</span><span>The portal locks itself at the deadline. A submission that is half-saved when the clock runs out is a submission that does not exist.</span></li>
+            </ul>
+          </div>
+
+          <div class="rule-block" id="r-judging">
+            <h3>⑤ Judging criteria</h3>
+            <p class="note" style="margin-bottom:16px">Every project is scored out of 100 by at least three judges; the top ten by mean score go to the finals, where the full jury re-scores the pitch.</p>
+            <div class="table-scroll">
+              <table class="data">
+                <caption>Weighted rubric — published in advance, applied without exception</caption>
+                <thead><tr><th>Criterion</th><th class="num">Weight</th><th>What the judges look for</th></tr></thead>
+                <tbody id="rubric-body"></tbody>
+              </table>
+            </div>
+            <div class="alert" style="margin-top:20px">
+              <span class="ico" aria-hidden="true">ℹ</span>
+              <p>Ties are broken first by Technical Execution, then by Impact, then by submission timestamp — earlier wins. Judges' decisions are final, and scores are released to each team by email after the ceremony.</p>
+            </div>
+          </div>
+
+          <div class="rule-block" id="r-timeline">
+            <h3>⑥ Timelines</h3>
+            <div class="table-scroll">
+              <table class="data">
+                <caption>All times IST. The countdown at the top of every page tracks the next one.</caption>
+                <thead><tr><th>Milestone</th><th>When</th><th>Notes</th></tr></thead>
+                <tbody id="timeline-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="rule-block" id="r-legal">
+            <h3>⑦ Intellectual property &amp; prize money</h3>
+            <ul class="rule-list">
+              <li><span class="mk">✓</span><span><b>You keep your IP.</b> Sponsors and organisers receive only a non-exclusive right to feature your project name, team and demo in event coverage.</span></li>
+              <li><span class="mk">✓</span><span><b>No equity.</b> Prize money carries no claim on whatever you build afterwards.</span></li>
+              <li><span class="mk">✓</span><span><b>Payment.</b> Bank transfer within 30 working days of the ceremony, split equally across the three members unless the Team Lead instructs otherwise in writing. TDS applies under Indian law and PAN details are required.</span></li>
+              <li><span class="mk">✓</span><span><b>Open-source licences.</b> Respect them. A licence violation found by the jury disqualifies the project outright.</span></li>
+            </ul>
+            <div class="alert ok" style="margin-top:24px">
+              <span class="ico" aria-hidden="true">✓</span>
+              <p>Read it all? <a href="#/register" data-goto="register">Register your team</a> — it takes about four minutes.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div></section>
+  </section>
 </div>
 
-<!-- ================= SUBMIT PROJECT ================= -->
-<div class="view" id="view-submit">
-  <section><div class="wrap">
-    <div class="sec-head"><div class="eyebrow">Project Submission</div><h2>Ship your build</h2>
-      <p>Submit your project's repository and demo before the Sunday 12:00 deadline. You can update your entry any time until submissions close.</p></div>
-    <div class="split wide-left">
-      <form class="card" id="subForm" novalidate>
-        <div class="field">
-          <label for="p-team">Team name <span class="req">*</span></label>
-          <input id="p-team" type="text" placeholder="Your team name" required>
-        </div>
-        <div class="field">
-          <label for="p-title">Project title <span class="req">*</span></label>
-          <input id="p-title" type="text" placeholder="e.g. LedgerLoop — autonomous reconciliation agent" required>
-        </div>
-        <div class="field">
-          <label for="p-track">Track <span class="req">*</span></label>
-          <select id="p-track" required>
-            <option value="">Select a track…</option>
-            <option>Agentic AI for Enterprise</option>
-            <option>Fintech &amp; Inclusion</option>
-            <option>Sustainable Operations</option>
-          </select>
-        </div>
-        <div class="two">
-          <div class="field"><label for="p-repo">Repository URL <span class="req">*</span></label><input id="p-repo" type="url" placeholder="https://github.com/…" required></div>
-          <div class="field"><label for="p-demo">Demo video URL</label><input id="p-demo" type="url" placeholder="https://youtu.be/…"></div>
-        </div>
-        <div class="field">
-          <label for="p-desc">One-line pitch <span class="req">*</span></label>
-          <textarea id="p-desc" placeholder="What does it do, and who is it for?" required></textarea>
-        </div>
-        <div class="arena-actions">
-          <button type="submit" class="btn btn-primary">Submit project</button>
-          <span class="form-msg" id="subMsg" role="status"></span>
-        </div>
-      </form>
-      <aside class="card">
-        <h3 style="font-size:1.05rem;margin-bottom:10px">Submission checklist</h3>
-        <ul class="checklist">
-          <li><span class="bx">▶</span><span>Public repo with a clear README.</span></li>
-          <li><span class="bx">▶</span><span>A 3-minute demo video link.</span></li>
-          <li><span class="bx">▶</span><span>One track selected.</span></li>
-          <li><span class="bx">▶</span><span>All open-source credits listed.</span></li>
-          <li><span class="bx">▶</span><span>Submitted before <b>15 Nov · 12:00</b>.</span></li>
-        </ul>
-      </aside>
+<!-- ====================== REGISTER ====================== -->
+<div class="view" id="view-register" role="tabpanel" aria-label="Team registration">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Registration · closes 1 November 2026</p>
+        <h2>Register your team of three</h2>
+        <p>Every member needs a name, email, college and role. We issue your team ID the moment all three are in — that ID is what gets you through the gate and into the submission portal.</p>
+      </div>
+
+      <!-- Success state, revealed after registration -->
+      <div id="reg-success" hidden></div>
+
+      <div class="split wide-left" id="reg-form-wrap">
+        <form class="card" id="regForm" novalidate>
+          <fieldset>
+            <legend><span class="num" aria-hidden="true">0</span> Team details</legend>
+            <div class="two">
+              <div class="field">
+                <label for="r-team">Team name <span class="req" aria-hidden="true">*</span></label>
+                <input id="r-team" name="team" type="text" required autocomplete="organization" placeholder="e.g. Neural Ninjas" aria-describedby="r-team-err">
+                <p class="err-msg" id="r-team-err" role="alert"></p>
+              </div>
+              <div class="field">
+                <label for="r-college">Primary college <span class="req" aria-hidden="true">*</span></label>
+                <input id="r-college" name="college" type="text" required list="college-list" placeholder="e.g. IIM Lucknow" aria-describedby="r-college-err">
+                <p class="err-msg" id="r-college-err" role="alert"></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="r-track">Preferred track <span class="req" aria-hidden="true">*</span></label>
+              <select id="r-track" name="track" required aria-describedby="r-track-hint r-track-err">
+                <option value="">Select a track…</option>
+              </select>
+              <p class="hint" id="r-track-hint">You may switch tracks once, any time before submissions close.</p>
+              <p class="err-msg" id="r-track-err" role="alert"></p>
+            </div>
+          </fieldset>
+
+          <!-- the three member fieldsets are generated so the count can never drift -->
+          <div id="member-fields"></div>
+
+          <div class="field">
+            <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.88rem">
+              <input type="checkbox" id="r-agree" style="width:auto;min-height:auto;margin-top:4px" required>
+              <span>All three of us have read the <a href="#/rules" data-goto="rules">rules and code of conduct</a> and agree to be bound by them. <span class="req" aria-hidden="true">*</span></span>
+            </label>
+            <p class="err-msg" id="r-agree-err" role="alert"></p>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary btn-lg" type="submit" id="regSubmit">Register team →</button>
+            <span class="form-msg" id="regMsg" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+
+        <aside class="grid" style="gap:16px">
+          <div class="card">
+            <h3>Before you start</h3>
+            <ul class="rule-list" style="margin-top:12px">
+              <li><span class="mk">✓</span><span>Have all three members' <b>college email addresses</b> handy.</span></li>
+              <li><span class="mk">✓</span><span>Decide who is <b>Team Lead</b> — they receive every official email.</span></li>
+              <li><span class="mk">✓</span><span>Pick a track. It is not binding until submission.</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>What happens next</h3>
+            <ol style="margin:12px 0 0;padding-left:1.1em;font-size:.9rem;color:var(--muted)">
+              <li>You get a unique team ID on screen, immediately.</li>
+              <li>A confirmation email goes to all three members.</li>
+              <li>Your <a href="#/dashboard" data-goto="dashboard">Team Dashboard</a> unlocks with announcements and quick links.</li>
+              <li>Warm up in the <a href="#/arena" data-goto="arena">Coding Arena</a> — points carry to the leaderboard.</li>
+            </ol>
+          </div>
+          <div class="alert">
+            <span class="ico" aria-hidden="true">🔒</span>
+            <p>We ask for the minimum: name, email, college, role. Emails are used for event communication only and are deleted 90 days after the event.</p>
+          </div>
+        </aside>
+      </div>
+
+      <datalist id="college-list">
+        <option>IIM Lucknow</option><option>IIT Delhi</option><option>IIT Bombay</option>
+        <option>IIT Kanpur</option><option>BITS Pilani</option><option>NIT Trichy</option>
+        <option>Delhi Technological University</option><option>VIT Vellore</option><option>SRCC Delhi</option>
+      </datalist>
     </div>
-    <hr class="divider">
-    <h3 style="font-size:1.2rem;margin-bottom:4px">Submitted projects</h3>
-    <p class="note" style="margin-bottom:16px">Entries you submit are stored in this browser so your Team Dashboard and Analytics stay in sync.</p>
-    <div class="grid" id="subList"></div>
-  </div></section>
+  </section>
 </div>
 
-<!-- ================= TEAM DASHBOARD ================= -->
-<div class="view" id="view-dashboard">
-  <section><div class="wrap">
-    <div class="sec-head"><div class="eyebrow">Team Dashboard</div><h2>Your command centre</h2>
-      <p>Set up your three-member team once, then track your registration, practice points and submission status at a glance.</p></div>
+<!-- ====================== CODING ARENA ====================== -->
+<div class="view" id="view-arena" role="tabpanel" aria-label="Coding Arena">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Coding Arena</p>
+        <h2>Warm up before the storm</h2>
+        <p>Official problem statements, the resources you get on the day, and a set of practice challenges you can solve right here. Clearing one banks points for your team on the live leaderboard.</p>
+      </div>
 
-    <div id="dashEmpty" class="card" hidden>
-      <h3 style="font-size:1.15rem;margin-bottom:4px">Create your team</h3>
-      <p class="note" style="margin-bottom:16px">Register your team of three to unlock the dashboard. This is stored locally in your browser.</p>
-      <form id="teamForm" novalidate>
-        <div class="two">
-          <div class="field"><label for="t-name">Team name <span class="req">*</span></label><input id="t-name" type="text" placeholder="e.g. Neural Ninjas" required></div>
-          <div class="field"><label for="t-college">College <span class="req">*</span></label><input id="t-college" type="text" value="IIM Lucknow" required></div>
-        </div>
-        <div class="field"><label for="t-track">Preferred track <span class="req">*</span></label>
-          <select id="t-track" required><option value="">Select…</option><option>Agentic AI for Enterprise</option><option>Fintech &amp; Inclusion</option><option>Sustainable Operations</option></select></div>
-        <div class="two">
-          <div class="field"><label for="t-m1">Member 1 · Lead <span class="req">*</span></label><input id="t-m1" type="text" placeholder="Full name" required></div>
-          <div class="field"><label for="t-m1e">Lead email <span class="req">*</span></label><input id="t-m1e" type="email" placeholder="Email" required></div>
-        </div>
-        <div class="two">
-          <div class="field"><label for="t-m2">Member 2 <span class="req">*</span></label><input id="t-m2" type="text" placeholder="Full name" required></div>
-          <div class="field"><label for="t-m3">Member 3 <span class="req">*</span></label><input id="t-m3" type="text" placeholder="Full name" required></div>
-        </div>
-        <div class="arena-actions">
-          <button type="submit" class="btn btn-primary">Create team</button>
-          <span class="form-msg" id="teamMsg" role="status"></span>
-        </div>
-      </form>
-    </div>
-
-    <div id="dashMain" hidden>
-      <div class="split even">
+      <div class="arena-grid">
         <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-            <div>
-              <div class="eyebrow" id="d-track">—</div>
-              <h3 style="font-size:1.5rem;margin-top:4px" id="d-name">—</h3>
-              <div class="note mono" id="d-id">—</div>
-            </div>
-            <div style="text-align:right">
-              <div class="mono" style="font-size:1.6rem;color:var(--gold)" id="d-points">0</div>
-              <div class="note">arena points</div>
-            </div>
+          <div class="chal-tabs" id="chalTabs" role="tablist" aria-label="Practice challenges"></div>
+          <div class="chal-meta">
+            <span class="tagchip" id="chalDiff">—</span>
+            <span class="tagchip" id="chalPts">—</span>
+            <span class="note" id="chalSolved"></span>
           </div>
-          <div class="status-row" id="d-statuses"></div>
-          <div class="member-list" id="d-members"></div>
-          <div class="arena-actions" style="margin-top:16px">
-            <button class="btn btn-ghost btn-sm" data-goto="arena">Earn points →</button>
-            <button class="btn btn-ghost btn-sm" data-goto="submit">Submit project →</button>
-            <button class="btn btn-ghost btn-sm" id="resetTeamBtn" style="margin-left:auto;color:var(--danger)">Reset team</button>
+          <h3 id="chalTitle" style="font-size:1.2rem">—</h3>
+          <p class="note" id="chalDesc" style="margin:8px 0 14px"></p>
+
+          <label class="sr-only" for="codeArea">Code editor</label>
+          <textarea class="code-editor" id="codeArea" spellcheck="false" autocapitalize="off" autocorrect="off"></textarea>
+
+          <div class="arena-actions">
+            <button class="btn btn-mint btn-sm" id="runBtn">▶ Run tests</button>
+            <button class="btn btn-ghost btn-sm" id="resetBtn">Reset code</button>
+            <span class="note mono" id="arenaPoints" style="margin-left:auto"></span>
           </div>
+          <div class="console" id="console" role="status" aria-live="polite"><span class="dim">Test results will appear here.</span></div>
+          <p class="note" style="margin-top:12px">Your code runs in this browser tab only. On event day, submissions are executed in a sandboxed runner and scored server-side.</p>
         </div>
 
-        <div class="grid">
+        <div class="grid" style="gap:16px">
           <div class="card">
-            <h4 style="font-size:1rem;margin-bottom:2px">Readiness</h4>
-            <p class="note" style="margin-bottom:6px"><span id="d-readpct">0</span>% ready for judging</p>
-            <div class="progress"><i id="d-readbar" style="width:0%"></i></div>
-            <ul class="checklist" id="d-checklist" style="margin-top:14px"></ul>
+            <h3>Live leaderboard</h3>
+            <p class="note" style="margin:4px 0 12px">Practice points, updated as you solve.</p>
+            <div class="table-scroll">
+              <table class="lb" id="leaderboard">
+                <caption class="sr-only">Team practice points, highest first</caption>
+                <thead><tr><th scope="col" style="width:36px">#</th><th scope="col">Team</th><th scope="col" class="pts">Points</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
           </div>
           <div class="card">
-            <h4 style="font-size:1rem;margin-bottom:8px">Your submission</h4>
-            <div id="d-submission"><div class="empty">No project submitted yet.</div></div>
+            <h3>Resources</h3>
+            <p class="note" style="margin:4px 0 12px">Unlocked for registered teams at check-in.</p>
+            <ul class="res-list" id="res-list"></ul>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="sec-head">
+        <p class="eyebrow">Problem statements</p>
+        <h2 style="font-size:clamp(1.4rem,3.6vw,1.9rem)">The briefs you'll be building against</h2>
+        <p>Written by the sponsor engineering teams. Full versions with datasets and acceptance criteria unlock at 11:00 on 14 November.</p>
+      </div>
+      <div class="grid grid-2" id="ps-list"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================== SUBMIT ====================== -->
+<div class="view" id="view-submit" role="tabpanel" aria-label="Project submission">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Project submission</p>
+        <h2>Submit your project</h2>
+        <p>Editable as often as you like until the deadline. The last saved version is the one the jury reads.</p>
+      </div>
+
+      <div id="sub-deadline-banner" style="margin-bottom:24px"></div>
+
+      <div class="split wide-left">
+        <form class="card" id="subForm" novalidate>
+          <div class="field">
+            <label for="s-title">Project title <span class="req" aria-hidden="true">*</span></label>
+            <input id="s-title" type="text" required placeholder="e.g. LedgerLoop — autonomous three-way match" aria-describedby="s-title-err">
+            <p class="err-msg" id="s-title-err" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="s-track">Track <span class="req" aria-hidden="true">*</span></label>
+            <select id="s-track" required aria-describedby="s-track-err"><option value="">Select a track…</option></select>
+            <p class="err-msg" id="s-track-err" role="alert"></p>
+          </div>
+
+          <div class="two">
+            <div class="field">
+              <label for="s-repo">Public repository URL <span class="req" aria-hidden="true">*</span></label>
+              <input id="s-repo" type="url" required inputmode="url" placeholder="https://github.com/team/project" aria-describedby="s-repo-hint s-repo-err">
+              <p class="hint" id="s-repo-hint">Must be public at judging time.</p>
+              <p class="err-msg" id="s-repo-err" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="s-demo">Demo video URL <span class="req" aria-hidden="true">*</span></label>
+              <input id="s-demo" type="url" required inputmode="url" placeholder="https://youtu.be/…" aria-describedby="s-demo-hint s-demo-err">
+              <p class="hint" id="s-demo-hint">Three minutes maximum.</p>
+              <p class="err-msg" id="s-demo-err" role="alert"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="s-summary">Project summary <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="s-summary" required maxlength="1100" placeholder="What does it do, who is it for, and what did you build this weekend?" aria-describedby="s-summary-hint s-summary-err"></textarea>
+            <p class="hint" id="s-summary-hint"><span id="s-count">0</span> / 150 words — the first thing every judge reads.</p>
+            <p class="err-msg" id="s-summary-err" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="s-tools">Tools &amp; AI assistants used <span class="req" aria-hidden="true">*</span></label>
+            <input id="s-tools" type="text" required placeholder="e.g. Claude Code, Next.js starter, Razorpay sandbox" aria-describedby="s-tools-hint s-tools-err">
+            <p class="hint" id="s-tools-hint">Declaring these is not penalised. Hiding them is.</p>
+            <p class="err-msg" id="s-tools-err" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="s-deck">Slide deck (PDF) <span class="req" aria-hidden="true">*</span></label>
+            <label class="file-drop" for="s-deck">
+              <span aria-hidden="true" style="font-size:1.6rem">📄</span>
+              <div class="note" style="margin-top:6px">Ten slides maximum, 20 MB limit</div>
+              <input id="s-deck" type="file" accept="application/pdf,.pdf" aria-describedby="s-deck-err">
+            </label>
+            <p class="hint" id="s-deck-name"></p>
+            <p class="err-msg" id="s-deck-err" role="alert"></p>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary btn-lg" type="submit" id="subSubmit">Submit project</button>
+            <button class="btn btn-danger btn-sm" type="button" id="withdrawBtn" hidden>Withdraw submission</button>
+            <span class="form-msg" id="subMsg" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+
+        <aside class="grid" style="gap:16px">
+          <div class="card" id="sub-status-card">
+            <h3>Submission status</h3>
+            <div id="sub-status"></div>
+          </div>
+          <div class="card">
+            <h3>Checklist</h3>
+            <ul class="checklist" id="sub-checklist" style="margin-top:12px"></ul>
+          </div>
+          <div class="alert warn">
+            <span class="ico" aria-hidden="true">⏰</span>
+            <p>The portal locks itself at the deadline. Do not leave the video upload to the final ten minutes — every year, somebody does.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================== TEAM DASHBOARD ====================== -->
+<div class="view" id="view-dashboard" role="tabpanel" aria-label="Team dashboard">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Team dashboard</p>
+        <h2>Your team at a glance</h2>
+      </div>
+
+      <div id="dash-empty" hidden>
+        <div class="empty" style="padding:48px 24px">
+          <p style="font-size:1.05rem;color:var(--text);margin-bottom:8px"><b>No team registered on this device yet.</b></p>
+          <p class="note" style="max-width:46ch;margin:0 auto 20px">Register your team of three and this dashboard fills with your members, submission status, announcements and quick links.</p>
+          <a class="btn btn-primary" href="#/register" data-goto="register">Register your team →</a>
+        </div>
+      </div>
+
+      <div id="dash-main" hidden>
+        <div class="split wide-left">
+          <div class="grid" style="gap:16px">
+            <div class="card">
+              <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start">
+                <div>
+                  <p class="eyebrow" id="d-track">—</p>
+                  <h3 style="font-size:1.6rem;margin-top:4px" id="d-name">—</h3>
+                  <p class="note mono" id="d-id" style="margin:4px 0 0">—</p>
+                </div>
+                <div style="text-align:right">
+                  <div class="note">Arena points</div>
+                  <div class="mono" style="font-size:1.7rem;color:var(--gold);font-weight:600" id="d-points">0</div>
+                </div>
+              </div>
+              <div class="status-row" id="d-statuses"></div>
+              <h4 style="font-size:.95rem;margin-bottom:10px">Members</h4>
+              <div class="member-list" id="d-members"></div>
+            </div>
+
+            <div class="card">
+              <h3>Readiness</h3>
+              <p class="note" style="margin:4px 0 6px"><span id="d-readpct">0</span>% ready for judging</p>
+              <div class="progress"><i id="d-readbar" style="width:0%"></i></div>
+              <ul class="checklist" id="d-checklist" style="margin-top:16px"></ul>
+            </div>
+
+            <div class="card">
+              <h3>Current submission</h3>
+              <div id="d-submission" style="margin-top:12px"></div>
+            </div>
+          </div>
+
+          <div class="grid" style="gap:16px">
+            <div class="card">
+              <h3>Quick links</h3>
+              <div class="quick-links" style="margin-top:12px">
+                <button data-goto="submit"><span class="t">Submit project</span><span class="s">Edit until deadline</span></button>
+                <button data-goto="arena"><span class="t">Coding Arena</span><span class="s">Practice &amp; points</span></button>
+                <button data-goto="rules"><span class="t">Rules</span><span class="s">Rubric &amp; format</span></button>
+                <button data-goto="analytics"><span class="t">Analytics</span><span class="s">Event numbers</span></button>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Announcements</h3>
+              <p class="note" style="margin:4px 0 14px">From the organising desk.</p>
+              <ul class="announce" id="d-announce"></ul>
+            </div>
+            <div class="card">
+              <h3>Danger zone</h3>
+              <p class="note" style="margin:8px 0 14px">Clears the team and submission stored in this browser. In production this would be an organiser-approved withdrawal.</p>
+              <button class="btn btn-danger btn-sm" id="resetTeamBtn">Reset my team</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div></section>
+  </section>
 </div>
 
-<!-- ================= ANALYTICS ================= -->
-<div class="view" id="view-analytics">
-  <section><div class="wrap">
-    <div class="sec-head"><div class="eyebrow">Analytics Dashboard</div><h2>The event in numbers</h2>
-      <p>A live snapshot of participation. Figures below include seeded event data plus everything you do in this browser.</p></div>
-    <div class="kpis" id="an-kpis" style="margin-top:0"></div>
-    <div class="charts" style="margin-top:20px">
-      <div class="card chart-card"><h4>Cumulative registrations</h4><div class="sub">Teams registered by day</div><div class="chart-box"><canvas id="chartReg"></canvas></div></div>
-      <div class="card chart-card"><h4>Submissions by track</h4><div class="sub">Where teams are building</div><div class="chart-box"><canvas id="chartTrack"></canvas></div></div>
-      <div class="card chart-card"><h4>Teams by college</h4><div class="sub">Participating institutions</div><div class="chart-box"><canvas id="chartCollege"></canvas></div></div>
-      <div class="card chart-card"><h4>Top teams by points</h4><div class="sub">Coding Arena leaderboard</div><div class="chart-box"><canvas id="chartPoints"></canvas></div></div>
+<!-- ====================== ANALYTICS ====================== -->
+<div class="view" id="view-analytics" role="tabpanel" aria-label="Analytics dashboard">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Organiser view</p>
+        <h2>Analytics dashboard</h2>
+        <p>Registration flow, submission velocity, track and campus spread, and engagement — the numbers the organising committee watches on the day.</p>
+      </div>
+
+      <div class="org-bar" style="margin-bottom:24px">
+        <span aria-hidden="true">👁</span>
+        <span><b>Organiser-facing view.</b> In production this sits behind committee sign-in. Figures are mock data from <code>data.js</code>, updated live with whatever you do on this site.</span>
+      </div>
+
+      <div class="kpis" id="an-kpis" style="margin-top:0"></div>
+
+      <div class="charts" style="margin-top:24px">
+        <div class="card chart-card">
+          <h4>Cumulative registrations</h4>
+          <p class="sub">Teams registered, by week</p>
+          <div class="chart-box"><canvas id="chartReg" aria-label="Line chart of cumulative team registrations by week" role="img"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h4>Submissions over time</h4>
+          <p class="sub">Projects received across the build window</p>
+          <div class="chart-box"><canvas id="chartSub" aria-label="Line chart of cumulative project submissions across the build window" role="img"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h4>Distribution by track</h4>
+          <p class="sub">Where teams chose to build</p>
+          <div class="chart-box"><canvas id="chartTrack" aria-label="Doughnut chart of submissions by track" role="img"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h4>Teams by campus</h4>
+          <p class="sub">Top participating institutions</p>
+          <div class="chart-box"><canvas id="chartCollege" aria-label="Bar chart of teams by college" role="img"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h4>Engagement — Arena solves</h4>
+          <p class="sub">Practice challenges cleared per day</p>
+          <div class="chart-box"><canvas id="chartEngage" aria-label="Bar chart of arena challenges solved per day" role="img"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h4>Registration funnel</h4>
+          <p class="sub">Registered → active → submitted</p>
+          <div class="chart-box"><canvas id="chartFunnel" aria-label="Horizontal bar chart of the registration to submission funnel" role="img"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:24px">
+        <h3>Top teams by practice points</h3>
+        <p class="note" style="margin:4px 0 14px">Same source as the Arena leaderboard.</p>
+        <div class="table-scroll">
+          <table class="lb" id="an-table">
+            <thead><tr><th scope="col" style="width:36px">#</th><th scope="col">Team</th><th scope="col">Campus</th><th scope="col">Track</th><th scope="col" class="pts">Points</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <p class="note" style="margin-top:16px">Charts render with Chart.js and recolour with the light/dark theme. Refresh the analytics tab after submitting or solving to see them update.</p>
-  </div></section>
+  </section>
 </div>
 
-<footer><div class="wrap foot-inner">
-  <div><div class="brand" style="margin-bottom:4px"><span class="spark">CS</span> CodeStorm '26</div>
-    <small>Organised by the student body of IIM Lucknow · Noida Campus.</small></div>
-  <div><small>Demo event hub · not an official IIM Lucknow page. All data stays in your browser.</small></div>
-</div></footer>
+</main>
 
-<script>
-/* ---------------- State ---------------- */
-var STORE = 'cs26hub-v1';
-var DEFAULT_STATE = { team: null, submissions: [], solved: {}, arenaPoints: 0 };
-function loadState(){ try { var s = JSON.parse(localStorage.getItem(STORE)); return Object.assign({}, DEFAULT_STATE, s || {}); } catch(e){ return Object.assign({}, DEFAULT_STATE); } }
-function saveState(){ try { localStorage.setItem(STORE, JSON.stringify(state)); } catch(e){} }
-var state = loadState();
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:10px"><span class="spark" aria-hidden="true">CS</span><span class="brand-text">CodeStorm '26<small>IIM Lucknow</small></span></div>
+        <p class="note" style="max-width:38ch">The flagship hackathon of IIM Lucknow, Noida Campus. 14–15 November 2026, teams of three, ₹10,00,000 in prizes.</p>
+      </div>
+      <div>
+        <h5>Event</h5>
+        <ul class="foot-links">
+          <li><button data-goto="home">Home</button></li>
+          <li><button data-goto="rules">Rules &amp; judging</button></li>
+          <li><button data-goto="register">Register</button></li>
+          <li><button data-goto="arena">Coding Arena</button></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Participants</h5>
+        <ul class="foot-links">
+          <li><button data-goto="submit">Submit a project</button></li>
+          <li><button data-goto="dashboard">Team dashboard</button></li>
+          <li><button data-goto="analytics">Analytics</button></li>
+          <li><a id="foot-mail" href="#">Contact the organisers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CodeStorm, IIM Lucknow Noida Campus. Demo site — not an official IIM Lucknow page.</span>
+      <span>All data stays in your browser. No backend is connected.</span>
+    </div>
+  </div>
+</footer>
 
-/* Seeded event data (for a lively analytics board) */
-var SEED_TEAMS = [
-  {team:'Neural Ninjas', college:'IIM Lucknow', pts:420, seed:true},
-  {team:'ByteBandits', college:'IIM Lucknow', pts:360, seed:true},
-  {team:'StackSultans', college:'IIT Kanpur', pts:340, seed:true},
-  {team:'QuantumQuokkas', college:'IIM Lucknow', pts:300, seed:true},
-  {team:'LogicLoop', college:'BITS Pilani', pts:280, seed:true},
-  {team:'DataDynamos', college:'IIT Delhi', pts:250, seed:true},
-  {team:'AgentAce', college:'IIM Lucknow', pts:230, seed:true},
-  {team:'PixelPirates', college:'NIT Trichy', pts:190, seed:true}
-];
-var SEED_REG = [ // cumulative registrations by date label
-  ['Oct 10',6],['Oct 15',14],['Oct 20',27],['Oct 24',41],['Oct 28',58],['Nov 01',86]
-];
-var SEED_SUB_TRACKS = { 'Agentic AI for Enterprise':11, 'Fintech & Inclusion':8, 'Sustainable Operations':6 };
+<div class="toast-stack" id="toasts" aria-live="polite" aria-atomic="false"></div>
 
-/* ---------------- Tabs ---------------- */
-var views = ['overview','arena','submit','dashboard','analytics'];
-function showView(v){
-  views.forEach(function(x){
-    var el = document.getElementById('view-'+x);
-    if(el) el.classList.toggle('active', x===v);
-  });
-  document.querySelectorAll('#tabs .tab').forEach(function(t){ t.setAttribute('aria-selected', t.dataset.view===v ? 'true':'false'); });
-  window.scrollTo({top:0, behavior:'instant' in document.documentElement.style ? 'auto':'auto'});
-  if(v==='analytics') renderCharts();
-  if(v==='dashboard') renderDashboard();
-  if(v==='arena') { renderLeaderboard(); }
-}
-document.getElementById('tabs').addEventListener('click', function(e){ var b=e.target.closest('.tab'); if(b) showView(b.dataset.view); });
-document.body.addEventListener('click', function(e){ var g=e.target.closest('[data-goto]'); if(g) showView(g.dataset.goto); });
-
-/* ---------------- Theme ---------------- */
-(function(){
-  var root=document.documentElement, btn=document.getElementById('themeBtn');
-  try { var s=localStorage.getItem('cs26-theme'); if(s) root.setAttribute('data-theme',s); } catch(e){}
-  btn.addEventListener('click', function(){
-    var cur=root.getAttribute('data-theme'); if(!cur) cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
-    var next=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
-    try{ localStorage.setItem('cs26-theme',next); }catch(e){}
-    if(document.getElementById('view-analytics').classList.contains('active')) renderCharts();
-  });
-})();
-function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
-
-/* ---------------- Live Countdown (phase-aware) ---------------- */
-var MILESTONES = [
-  {key:'reg',   label:'Registration closes', short:'Reg closes', at:new Date('2026-11-01T23:59:00+05:30')},
-  {key:'start', label:'Hacking begins',      short:'Kickoff',    at:new Date('2026-11-14T11:00:00+05:30')},
-  {key:'submit',label:'Submissions close',   short:'Submit',     at:new Date('2026-11-15T12:00:00+05:30')},
-  {key:'finals',label:'Finals & awards',     short:'Finals',     at:new Date('2026-11-15T15:00:00+05:30')}
-];
-var CD_START = new Date('2026-09-18T00:00:00+05:30').getTime();
-function pad(n){ return (n<10?'0':'')+n; }
-function fmtDate(d){ return d.toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }
-function updateCountdown(){
-  var now=Date.now(), next=null;
-  for(var i=0;i<MILESTONES.length;i++){ if(MILESTONES[i].at.getTime()>now){ next=MILESTONES[i]; break; } }
-  var labelEl=document.getElementById('cd-phase-label'), tgtEl=document.getElementById('cd-target-date');
-  var d=document.getElementById('cd-d'),h=document.getElementById('cd-h'),m=document.getElementById('cd-m'),s=document.getElementById('cd-s');
-  if(!next){
-    labelEl.innerHTML='<span class="live" style="color:var(--muted)">●</span>&nbsp;Event concluded — thank you!';
-    tgtEl.textContent=''; d.textContent=h.textContent=m.textContent=s.textContent='00';
-    document.getElementById('cd-progress').style.width='100%';
-    document.getElementById('ov-status').textContent='Event concluded';
-  } else {
-    labelEl.innerHTML='<span class="live"><span class="dot"></span>LIVE</span>&nbsp;'+next.label+' in';
-    tgtEl.textContent=fmtDate(next.at)+' IST';
-    var diff=next.at.getTime()-now, sec=Math.floor(diff/1000);
-    d.textContent=Math.floor(sec/86400); h.textContent=pad(Math.floor((sec%86400)/3600));
-    m.textContent=pad(Math.floor((sec%3600)/60)); s.textContent=pad(sec%60);
-    var total=next.at.getTime()-CD_START, done=now-CD_START;
-    document.getElementById('cd-progress').style.width=Math.max(0,Math.min(100,(done/total)*100))+'%';
-    document.getElementById('ov-status').textContent = next.key==='reg' ? 'Registrations open' : (next.key==='start'?'Kickoff soon':'Hackathon live');
-  }
-  // milestones strip
-  var ms=document.getElementById('cd-milestones');
-  if(ms.childElementCount===0){
-    MILESTONES.forEach(function(mi){ var span=document.createElement('span'); span.className='cd-ms'; span.dataset.key=mi.key; span.textContent=mi.short; ms.appendChild(span); });
-  }
-  ms.querySelectorAll('.cd-ms').forEach(function(sp){
-    var mi=MILESTONES.filter(function(x){return x.key===sp.dataset.key;})[0];
-    sp.classList.remove('done','cur');
-    if(mi.at.getTime()<=now) sp.classList.add('done');
-    else if(next && mi.key===next.key) sp.classList.add('cur');
-  });
-}
-setInterval(updateCountdown,1000); updateCountdown();
-
-/* ---------------- KPIs ---------------- */
-function totals(){
-  var teams = SEED_TEAMS.length + (state.team?1:0);
-  var subsSeed = Object.keys(SEED_SUB_TRACKS).reduce(function(a,k){return a+SEED_SUB_TRACKS[k];},0);
-  var subs = subsSeed + state.submissions.length;
-  var solvedCount = Object.keys(state.solved).length;
-  return { teams:teams, subs:subs, solved:solvedCount, points:state.arenaPoints };
-}
-function renderKpis(elId, forDash){
-  var t=totals();
-  var items=[
-    {v:t.teams, l:'Teams registered', c:'v-violet'},
-    {v:t.subs, l:'Projects submitted', c:'v-mint'},
-    {v:'₹10,00,000', l:'Total prize pool', c:'v-gold'},
-    {v:CHALLENGES.length, l:'Arena challenges', c:'v-cyan'}
-  ];
-  var el=document.getElementById(elId); if(!el) return;
-  el.innerHTML=items.map(function(i){ return '<div class="kpi '+i.c+'"><div class="v">'+i.v+'</div><div class="l">'+i.l+'</div></div>'; }).join('');
-}
-
-/* ---------------- Coding Arena ---------------- */
-var CHALLENGES=[
-  { id:'fizz', title:'FizzBuzz Points', diff:'easy', pts:100, fn:'fizzbuzz',
-    desc:'Return the FizzBuzz string for n: "Fizz" if divisible by 3, "Buzz" if by 5, "FizzBuzz" if both, else the number as a string.',
-    starter:'function fizzbuzz(n) {\n  // return "Fizz", "Buzz", "FizzBuzz", or String(n)\n  \n}',
-    tests:[[[3],'Fizz'],[[5],'Buzz'],[[15],'FizzBuzz'],[[7],'7'],[[30],'FizzBuzz'],[[1],'1']] },
-  { id:'sum', title:'Two-Sum Exists', diff:'medium', pts:150, fn:'hasPair',
-    desc:'Given an array of numbers and a target, return true if any two distinct elements add up to the target, else false.',
-    starter:'function hasPair(nums, target) {\n  // return true if two distinct items sum to target\n  \n}',
-    tests:[[[[2,7,11,15],9],true],[[[3,2,4],6],true],[[[1,2,3],7],false],[[[0,4,3,0],0],true],[[[5],5],false]] },
-  { id:'rev', title:'Reverse Words', diff:'medium', pts:150, fn:'reverseWords',
-    desc:'Reverse the order of words in a sentence, collapsing extra spaces. "hello   world" → "world hello".',
-    starter:'function reverseWords(s) {\n  // reverse word order, single-space the result\n  \n}',
-    tests:[[['the sky is blue'],'blue is sky the'],[['  hello   world  '],'world hello'],[['single'],'single'],[['a b c'],'c b a']] },
-  { id:'anag', title:'Anagram Check', diff:'hard', pts:200, fn:'isAnagram',
-    desc:'Return true if strings a and b are anagrams of each other (same letters, any order), else false.',
-    starter:'function isAnagram(a, b) {\n  // true if a and b are anagrams\n  \n}',
-    tests:[[['listen','silent'],true],[['rat','car'],false],[['anagram','nagaram'],true],[['a','ab'],false],[['',''],true]] }
-];
-var curChal=CHALLENGES[0];
-function fmtArg(a){ try { return JSON.stringify(a); } catch(e){ return String(a); } }
-function renderChalTabs(){
-  var el=document.getElementById('chalTabs');
-  el.innerHTML=CHALLENGES.map(function(c){
-    return '<button class="chal-pick'+(state.solved[c.id]?' solved':'')+'" data-id="'+c.id+'" aria-selected="'+(c.id===curChal.id)+'">'+c.title+'</button>';
-  }).join('');
-}
-function loadChallenge(c){
-  curChal=c;
-  document.getElementById('chalTitle').textContent=c.title;
-  document.getElementById('chalDesc').textContent=c.desc;
-  var diff=document.getElementById('chalDiff'); diff.textContent=c.diff.toUpperCase(); diff.className='tagchip '+c.diff;
-  document.getElementById('chalPts').textContent='+'+c.pts+' pts';
-  document.getElementById('chalSolvedNote').textContent = state.solved[c.id] ? '✓ solved' : '';
-  document.getElementById('chalSolvedNote').style.color='var(--mint)';
-  var ta=document.getElementById('codeArea'); ta.value = (state.code && state.code[c.id]) ? state.code[c.id] : c.starter;
-  document.getElementById('console').innerHTML='<span class="dim">Test results will appear here.</span>';
-  renderChalTabs();
-  document.getElementById('arenaPointsNote').textContent='Your points: '+state.arenaPoints;
-}
-document.getElementById('chalTabs').addEventListener('click', function(e){ var b=e.target.closest('.chal-pick'); if(b){ var c=CHALLENGES.filter(function(x){return x.id===b.dataset.id;})[0]; loadChallenge(c);} });
-document.getElementById('resetBtn').addEventListener('click', function(){ document.getElementById('codeArea').value=curChal.starter; });
-document.getElementById('codeArea').addEventListener('input', function(){ state.code=state.code||{}; state.code[curChal.id]=this.value; saveState(); });
-document.getElementById('runBtn').addEventListener('click', runTests);
-function runTests(){
-  var con=document.getElementById('console'); var code=document.getElementById('codeArea').value;
-  var out=[]; var fn;
-  try {
-    fn=(new Function(code+'\n; return typeof '+curChal.fn+'==="function"?'+curChal.fn+':null;'))();
-    if(!fn){ con.innerHTML='<span class="fail">✗ Could not find a function named '+curChal.fn+'(). Keep that name.</span>'; return; }
-  } catch(err){ con.innerHTML='<span class="fail">✗ Syntax error: '+String(err.message||err)+'</span>'; return; }
-  var passed=0;
-  for(var i=0;i<curChal.tests.length;i++){
-    var t=curChal.tests[i], args=t[0], exp=t[1], got;
-    try { got=fn.apply(null,args); } catch(err){ out.push('<span class="fail">✗ case '+(i+1)+' threw: '+String(err.message||err)+'</span>'); continue; }
-    var ok=JSON.stringify(got)===JSON.stringify(exp);
-    if(ok) passed++;
-    out.push('<span class="'+(ok?'pass':'fail')+'">'+(ok?'✓':'✗')+' '+curChal.fn+'('+args.map(fmtArg).join(', ')+') → '+fmtArg(got)+(ok?'':' <span class="dim">(expected '+fmtArg(exp)+')</span>')+'</span>');
-  }
-  var all=passed===curChal.tests.length;
-  var head='<span class="'+(all?'pass':'dim')+'">'+passed+'/'+curChal.tests.length+' tests passed'+(all?' — challenge cleared!':'')+'</span>\n';
-  con.innerHTML=head+out.join('\n');
-  if(all && !state.solved[curChal.id]){
-    state.solved[curChal.id]=true; state.arenaPoints+=curChal.pts; saveState();
-    document.getElementById('chalSolvedNote').textContent='✓ solved';
-    document.getElementById('arenaPointsNote').textContent='Your points: '+state.arenaPoints;
-    renderChalTabs(); renderLeaderboard();
-  }
-}
-function renderLeaderboard(){
-  var rows=SEED_TEAMS.map(function(t){ return {team:t.team, pts:t.pts, you:false}; });
-  var myName = state.team ? state.team.name : 'You (guest)';
-  rows.push({team:myName, pts:state.arenaPoints, you:true});
-  rows.sort(function(a,b){ return b.pts-a.pts; });
-  var tb=document.querySelector('#leaderboard tbody');
-  tb.innerHTML=rows.map(function(r,i){
-    var rb=i===0?'g':i===1?'s':i===2?'b':'';
-    var medal=i<3?'★':(i+1);
-    return '<tr class="'+(r.you?'you':'')+'"><td><span class="rankbadge '+rb+'">'+medal+'</span></td><td>'+esc(r.team)+(r.you?' <span class="note">(you)</span>':'')+'</td><td class="pts">'+r.pts+'</td></tr>';
-  }).join('');
-}
-
-/* ---------------- Project Submission ---------------- */
-function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
-function isUrl(v){ return /^https?:\/\/.+\..+/.test(v); }
-document.getElementById('subForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  var msg=document.getElementById('subMsg'); msg.className='form-msg';
-  var team=val('p-team'), title=val('p-title'), track=val('p-track'), repo=val('p-repo'), demo=val('p-demo'), desc=val('p-desc');
-  if(!team||!title||!track||!repo||!desc){ return fail(msg,'Please fill in all required fields.'); }
-  if(!isUrl(repo)){ return fail(msg,'Enter a valid repository URL (starting with http).'); }
-  if(demo && !isUrl(demo)){ return fail(msg,'The demo URL doesn\'t look valid.'); }
-  var sub={ id:'PR-'+Math.random().toString(36).slice(2,6).toUpperCase(), team:team, title:title, track:track, repo:repo, demo:demo, desc:desc, at:Date.now() };
-  // replace existing submission by same team, else add
-  var idx=state.submissions.findIndex(function(x){ return x.team.toLowerCase()===team.toLowerCase(); });
-  if(idx>=0) state.submissions[idx]=sub; else state.submissions.push(sub);
-  saveState();
-  msg.textContent = idx>=0 ? '✓ Submission updated!' : '✓ Project submitted!'; msg.classList.add('ok');
-  document.getElementById('subForm').reset();
-  renderSubList(); renderKpis('ov-kpis');
-});
-function val(id){ return document.getElementById(id).value.trim(); }
-function fail(msg,text){ msg.textContent=text; msg.classList.add('err'); return false; }
-function renderSubList(){
-  var el=document.getElementById('subList');
-  if(state.submissions.length===0){ el.innerHTML='<div class="empty">No projects submitted yet. Your entries will show here.</div>'; return; }
-  el.innerHTML=state.submissions.slice().reverse().map(function(s){
-    return '<div class="sub-item"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">'+
-      '<div><div class="track-tag">'+esc(s.track)+'</div><h4>'+esc(s.title)+'</h4><div class="note">by '+esc(s.team)+' · '+s.id+'</div></div>'+
-      '<button class="btn btn-ghost btn-sm" data-del="'+s.id+'">Remove</button></div>'+
-      '<p class="note" style="margin:8px 0 0">'+esc(s.desc)+'</p>'+
-      '<div class="sub-links"><a href="'+esc(s.repo)+'" target="_blank" rel="noopener">↗ Repository</a>'+
-      (s.demo?'<a href="'+esc(s.demo)+'" target="_blank" rel="noopener">▶ Demo video</a>':'')+'</div></div>';
-  }).join('');
-}
-document.getElementById('subList').addEventListener('click', function(e){
-  var b=e.target.closest('[data-del]'); if(!b) return;
-  state.submissions=state.submissions.filter(function(x){return x.id!==b.dataset.del;}); saveState();
-  renderSubList(); renderKpis('ov-kpis'); renderDashboard();
-});
-
-/* ---------------- Team Dashboard ---------------- */
-document.getElementById('teamForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  var msg=document.getElementById('teamMsg'); msg.className='form-msg';
-  var name=val('t-name'), col=val('t-college'), track=val('t-track'), m1=val('t-m1'), m1e=val('t-m1e'), m2=val('t-m2'), m3=val('t-m3');
-  if(!name||!col||!track||!m1||!m1e||!m2||!m3){ msg.textContent='All three members and team details are required.'; msg.classList.add('err'); return; }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m1e)){ msg.textContent='The team lead needs a valid email.'; msg.classList.add('err'); return; }
-  state.team={ id:'CS26-'+Math.random().toString(36).slice(2,5).toUpperCase()+'-'+Math.floor(1000+Math.random()*9000), name:name, college:col, track:track,
-    members:[{n:m1,e:m1e,lead:true},{n:m2},{n:m3}], at:Date.now() };
-  saveState(); renderDashboard(); renderKpis('ov-kpis'); renderLeaderboard();
-});
-document.getElementById('resetTeamBtn').addEventListener('click', function(){
-  state.team=null; saveState(); renderDashboard(); renderKpis('ov-kpis'); renderLeaderboard();
-});
-var AV_COLORS=['var(--violet)','var(--gold)','var(--mint)','var(--cyan)'];
-function renderDashboard(){
-  var empty=document.getElementById('dashEmpty'), main=document.getElementById('dashMain');
-  if(!state.team){ empty.hidden=false; main.hidden=true; return; }
-  empty.hidden=true; main.hidden=false;
-  var t=state.team;
-  document.getElementById('d-track').textContent=t.track;
-  document.getElementById('d-name').textContent=t.name;
-  document.getElementById('d-id').textContent=t.id+' · '+t.college;
-  document.getElementById('d-points').textContent=state.arenaPoints;
-  // members
-  document.getElementById('d-members').innerHTML=t.members.map(function(m,i){
-    var initials=(m.n||'?').split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
-    return '<div class="member-row"><span class="avatar" style="background:'+AV_COLORS[i%AV_COLORS.length]+'">'+esc(initials)+'</span>'+
-      '<div><div style="font-weight:600">'+esc(m.n)+(m.lead?' <span class="note">· Lead</span>':'')+'</div>'+(m.e?'<div class="note">'+esc(m.e)+'</div>':'')+'</div></div>';
-  }).join('');
-  // submission
-  var mySub=state.submissions.filter(function(s){return s.team.toLowerCase()===t.name.toLowerCase();})[0];
-  var solvedCount=Object.keys(state.solved).length;
-  // statuses
-  var st=[];
-  st.push('<span class="status on">✓ Registered</span>');
-  st.push(solvedCount>0?'<span class="status on">✓ '+solvedCount+' arena challenge'+(solvedCount>1?'s':'')+' solved</span>':'<span class="status warn">○ No arena points yet</span>');
-  st.push(mySub?'<span class="status on">✓ Project submitted</span>':'<span class="status warn">○ Project not submitted</span>');
-  document.getElementById('d-statuses').innerHTML=st.join('');
-  // readiness checklist
-  var checks=[
-    {label:'Team of three registered', done:true},
-    {label:'Preferred track selected', done:!!t.track},
-    {label:'Practised in the Coding Arena', done:solvedCount>0},
-    {label:'Project repository submitted', done:!!mySub},
-    {label:'Demo video linked', done:!!(mySub && mySub.demo)}
-  ];
-  var doneN=checks.filter(function(c){return c.done;}).length;
-  var pct=Math.round(doneN/checks.length*100);
-  document.getElementById('d-readpct').textContent=pct;
-  document.getElementById('d-readbar').style.width=pct+'%';
-  document.getElementById('d-checklist').innerHTML=checks.map(function(c){
-    return '<li class="'+(c.done?'done':'')+'"><span class="bx">'+(c.done?'✓':'○')+'</span><span>'+c.label+'</span></li>';
-  }).join('');
-  // submission card
-  var sc=document.getElementById('d-submission');
-  if(mySub){
-    sc.innerHTML='<div class="track-tag" style="font-family:var(--font-mono);font-size:.72rem;color:var(--violet-soft)">'+esc(mySub.track)+'</div>'+
-      '<h4 style="font-size:1.05rem;margin:2px 0">'+esc(mySub.title)+'</h4><p class="note">'+esc(mySub.desc)+'</p>'+
-      '<div class="sub-links"><a href="'+esc(mySub.repo)+'" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">↗ Repo</a>'+
-      (mySub.demo?' <a href="'+esc(mySub.demo)+'" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">▶ Demo</a>':'')+'</div>';
-  } else {
-    sc.innerHTML='<div class="empty">No project submitted yet.<br><button class="btn btn-ghost btn-sm" data-goto="submit" style="margin-top:10px">Submit now →</button></div>';
-  }
-}
-
-/* ---------------- Analytics (Chart.js) ---------------- */
-var charts={};
-function chartFont(){ return "'IBM Plex Sans', sans-serif"; }
-function renderCharts(){
-  if(typeof Chart==='undefined') return;
-  renderKpis('an-kpis');
-  var text=cssVar('--muted'), grid=cssVar('--line');
-  var violet=cssVar('--violet'), gold=cssVar('--gold'), mint=cssVar('--mint'), cyan=cssVar('--cyan'), vsoft=cssVar('--violet-soft');
-  Chart.defaults.color=text; Chart.defaults.font.family=chartFont(); Chart.defaults.font.size=12;
-  Object.keys(charts).forEach(function(k){ if(charts[k]) charts[k].destroy(); });
-
-  // 1) cumulative registrations (add "today" point = current total)
-  var regLabels=SEED_REG.map(function(r){return r[0];});
-  var regData=SEED_REG.map(function(r){return r[1];});
-  regLabels.push('Now'); regData.push(SEED_REG[SEED_REG.length-1][1] + (state.team?1:0));
-  charts.reg=new Chart(document.getElementById('chartReg'),{ type:'line',
-    data:{ labels:regLabels, datasets:[{ label:'Teams', data:regData, borderColor:violet, backgroundColor:'rgba(139,108,255,.18)', fill:true, tension:.35, pointBackgroundColor:violet, pointRadius:3 }] },
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
-      scales:{ x:{grid:{color:grid}}, y:{grid:{color:grid}, beginAtZero:true} } } });
-
-  // 2) submissions by track (bar) — seed + user
-  var trackNames=Object.keys(SEED_SUB_TRACKS);
-  var trackData=trackNames.map(function(n){ var extra=state.submissions.filter(function(s){return s.track===n;}).length; return SEED_SUB_TRACKS[n]+extra; });
-  charts.track=new Chart(document.getElementById('chartTrack'),{ type:'bar',
-    data:{ labels:['Agentic AI','Fintech','Sustainability'], datasets:[{ data:trackData, backgroundColor:[violet,gold,mint], borderRadius:8, borderSkipped:false }] },
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
-      scales:{ x:{grid:{display:false}}, y:{grid:{color:grid}, beginAtZero:true} } } });
-
-  // 3) teams by college (doughnut)
-  var colCount={}; SEED_TEAMS.forEach(function(t){ colCount[t.college]=(colCount[t.college]||0)+1; });
-  if(state.team) colCount[state.team.college]=(colCount[state.team.college]||0)+1;
-  var colLabels=Object.keys(colCount), colData=colLabels.map(function(k){return colCount[k];});
-  charts.college=new Chart(document.getElementById('chartCollege'),{ type:'doughnut',
-    data:{ labels:colLabels, datasets:[{ data:colData, backgroundColor:[violet,gold,mint,cyan,vsoft,'#c98bff'], borderColor:cssVar('--surface'), borderWidth:2 }] },
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'right', labels:{boxWidth:12,padding:10}}}, cutout:'58%' } });
-
-  // 4) top teams by points (horizontal bar)
-  var lb=SEED_TEAMS.map(function(t){return {team:t.team,pts:t.pts};});
-  lb.push({team:(state.team?state.team.name:'You'), pts:state.arenaPoints, you:true});
-  lb.sort(function(a,b){return b.pts-a.pts;}); lb=lb.slice(0,6);
-  charts.points=new Chart(document.getElementById('chartPoints'),{ type:'bar',
-    data:{ labels:lb.map(function(x){return x.team;}), datasets:[{ data:lb.map(function(x){return x.pts;}),
-      backgroundColor:lb.map(function(x){return x.you?gold:violet;}), borderRadius:6, borderSkipped:false }] },
-    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
-      scales:{ x:{grid:{color:grid}, beginAtZero:true}, y:{grid:{display:false}} } } });
-}
-
-/* ---------------- Init ---------------- */
-renderKpis('ov-kpis');
-loadChallenge(CHALLENGES[0]);
-renderLeaderboard();
-renderSubList();
-renderDashboard();
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
